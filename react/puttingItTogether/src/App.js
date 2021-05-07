@@ -1,16 +1,14 @@
-
+import PersonCard from "./PersonCard";
 function App() {
   return (
-    <div> 
-      <h1> Hello Dojo</h1>
-      <p> Things I need to do: </p>
-      <ul> <li> Learn React</li>
-        <li>Climb Mt Everest</li>
-        <li> Run marathon</li>
-        <li> Feed the dogs</li>
-      </ul>
-    </div>
-  );
+    <div>
+   <PersonCard name="Radek Wazny" age="39" hairColor="blond" />
+   <PersonCard name="Piotr Kaluza" age="40" hairColor="blond" />
+   <PersonCard name="Luke Kaluza" age="4" hairColor="blond" />
+   <PersonCard name="Ben Kaluza" age="4" hairColor="blond" />
+   </div>
+
+  )
 }
 
 export default App;
