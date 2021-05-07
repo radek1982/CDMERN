@@ -21,7 +21,7 @@ class PersonCard extends React.Component {
 
             </div>
             <div>
-                <button onClick={this.makeOlder}> Increase age</button>
+                <button onClick={this.makeOlder}> Birthday button for {personData.name}</button>
             </div>
         </div>
         )
