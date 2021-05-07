@@ -1,8 +1,8 @@
-// 1
-var hello = 'world';    
-console.log(hello);                                   
+// 1 undefined - var prevents hosting
 
-// 2
+console.log(hello);                                   
+var hello = 'world';    
+// 2 magnet - local variable
 var needle = 'haystack';
 test();
 function test(){
@@ -18,7 +18,8 @@ function print(){
 console.log(brendan);
 
 
-// 4
+// 4 chicken
+// half-chicken 
 
 var food = 'chicken';
 console.log(food);
@@ -29,7 +30,7 @@ function eat(){
     var food = 'gone'; // var has no impact on global var
 }
 
-// 5 Error  mean not defined because of var
+// 5 Error  mean not defined - not hoisted because of var
 
 mean();
 console.log(food);
