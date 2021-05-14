@@ -5,6 +5,7 @@ function App() {
   const [state, setState] =  useState({
     first: "",
     last: "",
+    email: "",
     password: "", 
     confirm: "",
   })
