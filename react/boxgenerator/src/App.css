@@ -1,0 +1,32 @@
+
+html, body {
+  height:100%;
+  background: #ebebeb;
+}
+#root {
+  margin-top:50px;
+
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  padding:10px;
+  
+}
+.container {
+  padding:25px;
+  width:300px;
+  margin-top:50px;
+  display: flex;
+  flex-wrap:wrap;
+  min-height:200px;
+  background: rgba(255,255,255,.7);
+}
+
+.swatch {
+  width:100px;
+  height:100px;
+
+  margin:10px;
+  border-radius: 10px;
+  border: 2px solid black;
+}
