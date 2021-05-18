@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import List from './List';
+import Detail from "./Detail"
 
 
 import {Router} from "@reach/router"
@@ -16,6 +17,7 @@ function App() {
     <Router>
       <List path="/"></List>
       <List path=":rid"></List>
+      <Detail path="/detail/:rid"></Detail>
     </Router>
     </Container>
     </Fragment>

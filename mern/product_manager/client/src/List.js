@@ -1,45 +1,36 @@
-import React, { Fragment,useState,useEffect } from 'react'
-import axios from "axios"
-import Edit from "./Edit"
-import {Spinner,Button} from "react-bootstrap"
 
-const List = (props) => {
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import Edit from "./Edit";
+import {Link} from "@reach/router";
+import {Spinner} from "react-bootstrap";
 
-    const [products,setProducts] = useState([]);
-    const [loaded, setLoaded] = useState(false);
+const List =(props) => {
+
+    const [products, setProducts] = useState([]);
+    const [done, setDone] = useState(false)
+   
     useEffect(() => {
-        
-       !loaded && axios.get("http://localhost:8000/api/products/").then(res => { 
-        setProducts(res.data.products);
-        setLoaded(true);
-    })});
-    
-    const productData = loaded && products.length>0 && products.map((e,i) => (<tr key={e._id}><td>{e.title}</td> 
-    <td><Button variant="danger" onClick= {(x) =>  {
-        setLoaded(false);
-    axios.delete("http://localhost:8000/api/products/delete/" + e._id).then(() => {setLoaded(false)}) 
-    }} >Delete</Button></td></tr>))
-    return (
-    
-    
-    
-    <Fragment>
-        <Edit rid={props.rid} afterUpdate={(d) => {
+       !done && axios.get("http://localhost:8000/api/products").then((r) => setProducts(r.data.products)).then(() => setDone(true));
+    }, [done]);
 
-        console.log('After update', d)
-    setLoaded(false)}}></Edit>
-        <hr></hr>
+
+      const makeItem = (key, label)  =>{return (<li key={key}> <Link to={`/detail/${key}`}> {label}</Link></li>)}
+      const list= products.map((p) => makeItem(p._id, p.title));
+
+    //  console.log(list);
+
+    return (
+        <>
+        <Edit></Edit>
+            <h2> All Products</h2>
         
-        <h2> All Products</h2>
-        {!loaded ? <Spinner animation="border"></Spinner> : ""}   
-        <table className="table table-striped">
-            <thead>
-            </thead>
-        <tbody>
-        {productData}
-        </tbody>
-        </table>
-    </Fragment>)
+        <ul>    
+            
+            {list} </ul>
+            {!done ?  <Spinner animation="border" ></Spinner>: ""}
+          </>
+              )
 }
 
-export default List
+export default List;

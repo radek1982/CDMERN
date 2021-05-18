@@ -1,72 +1,61 @@
-import React, {useState} from 'react'
-import axios from "axios"
-import {Form, FormGroup, FormLabel, FormControl, Button, Spinner} from "react-bootstrap"
+import axios from "axios";
+import React, {useState, useEffect} from "react"
 
-const Edit = (props)  => {
+import {Form,FormGroup,FormControl,FormLabel, Button, Spinner} from "react-bootstrap"
+
+
+const  Edit = props =>{
+const mode = props.mode || "Add";
+const title = `${mode} Product`;
+const caption = `${mode} product`;
+
+const [data,setData] = useState({});
+
+const [done,setDone] = useState(true)
+
+return (
+<>
+<Form method="POST" onSubmit={(e) =>{
+    e.preventDefault();
+
+    let formData ={};
+    const f = new FormData(e.target);
+
+    for (let [k,v] of f ) {
+        
+        formData[k] = v;
     
-    const afterUpdate = props.afterUpdate;
-    const [ready, setReady] =useState(true);
-    const [data, setData] = useState({});
-    const id = props.rid;
-
-    if (id!==undefined) {
-  
     }
     
-    return(
+    setDone(false);
+    axios.post("http://localhost:8000/api/products/new", formData).then((r) => 
+    console.log(r.data.product)).then(() => setDone(true))
     
-    <Form onSubmit={(e) => {
-      e.preventDefault();
-      setReady(false);
-      const dt = {
-        title: e.target.title.value,
-        price: e.target.price.value,
-        description: e.target.description.value,
-      }
+}}>
 
-  
+<FormGroup>
+    <FormLabel>Title</FormLabel>
+    <FormControl type="text" name="title"></FormControl>
+</FormGroup>
 
-      axios.post("http://localhost:8000/api/products/new", dt)
-    
-        .then((x) => {
-          setData(x.data.product);
-          afterUpdate(x.data.product);
-          setReady(true)
-        })
-        .finally((x)=> {
-          setData(data);
-          setReady(true)
-      
-        })
-    }}> 
-  
-    
-    <h2> Add a product</h2>
-    
-      <FormGroup> 
-        <FormLabel >Title</FormLabel>
-        <FormControl type="text" id="title" name="title"></FormControl>
-      </FormGroup>
-      <FormGroup> 
-        <FormLabel>Price</FormLabel>
-        <FormControl type="text" id="price" name="price"></FormControl>
-      </FormGroup>
-      <FormGroup> 
-        <FormLabel> Description</FormLabel>
-        <FormControl as="textarea" id="description" name="description"></FormControl>
-      </FormGroup>
-  
-      <FormGroup> 
-        <Button variant="primary" type="submit" disabled={!ready}> Add Product</Button>
-      </FormGroup>
-  
-    {!ready?<Spinner animation="border"></Spinner>:""}
-      
-  
-  
-      
-      
-    </Form>)
-  }
-  
-  export default Edit
+<FormGroup>
+    <FormLabel>Price</FormLabel>
+    <FormControl type="price" name="price"></FormControl>
+</FormGroup>
+<FormGroup>
+    <FormLabel>Description</FormLabel>
+    <FormControl type="text" name="description"></FormControl>
+</FormGroup>
+<FormGroup>
+    <FormLabel>Description</FormLabel>
+    <FormControl as="textarea" name="description"></FormControl>
+</FormGroup>
+<Button variant="primary" type="submit">
+{caption}
+</Button>
+{!done ? <Spinner animation="border"></Spinner> : null}
+</Form>
+</>)
+}
+
+export default Edit
