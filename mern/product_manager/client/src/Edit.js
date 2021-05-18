@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react"
 import APIEndpoints from "./Config"
+import {Link} from "@reach/router"
 
 import {Form,FormGroup,FormControl,FormLabel, Button, Spinner} from "react-bootstrap"
 
+const defaultValues =  Promise.resolve({data:{product: {title: "", price:0, description: ""}}});
 
 const  Edit = props =>{
     let [done,setDone] = useState(false);
+
 const [data, setData] = useState({title: "", price: "0", description: ""});
 
 const titleCase = (s)   => s.charAt(0).toUpperCase()+s.slice(1);
@@ -14,6 +17,8 @@ const noop = (x) => {}
 
 const mode = props.mode || "add"
 const id =  props.rid || ""
+
+const web = (mode === "add") ? defaultValues :axios.get(APIEndpoints.detail(id));
 const modeWord = titleCase(props.mode || "add");
 const buttonWord = titleCase(mode === "edit" ? "update" : "add");
 const title = `${modeWord} Product`;
@@ -49,16 +54,13 @@ const onUpdate = props.onUpdate || noop
 
 
 //const dataPromise  = new Promise((res, rej) => setTimeout((res({data:{products:[{title: "X", price:1000, description: "XYZ"}]}}),100)));
-const web =  axios.get(APIEndpoints.detail(""));
-useEffect(() => {
-    web
-    .then((x) => 
+// const web =  
 
-    {
-        console.log(x);
-        setData({...x.data.products[0]})}).catch(e => console.log(e))
-    .finally(() => setDone(true))
-}, [data]);
+useEffect(() => {
+  
+    web.then((r) => setData(r.data.product)).then(() =>setDone(true)).finally(() =>setDone(true));
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 return (
 <>
 <Form method="POST" onSubmit= {submit}>
@@ -79,9 +81,11 @@ return (
     <FormLabel>Description</FormLabel>
     <FormControl as="textarea" name="description" value={(data.description)} onChange={change}></FormControl>
 </FormGroup>
+<Link to="/" className="btn btn-primary"> Go Back</Link>
 <Button variant="primary" type="submit">
 {caption}
 </Button>
+
 {!done ? <Spinner animation="border"></Spinner> : null}
 </Form>
 </>)
