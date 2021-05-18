@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const JokeSchema = new mongoose.Schema({
 	setup: String,
-	punchline: Number
+	punchline: String
 });
 
 const Joke = mongoose.model("Joke", JokeSchema);
