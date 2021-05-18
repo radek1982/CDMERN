@@ -5,12 +5,11 @@ import {Spinner,Button} from "react-bootstrap"
 
 const List = (props) => {
 
-    // eslint-disable-next-line
     const [products,setProducts] = useState([]);
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
         
-        axios.get("http://localhost:8000/api/products/").then(res => { 
+       !loaded && axios.get("http://localhost:8000/api/products/").then(res => { 
         setProducts(res.data.products);
         setLoaded(true);
     })});
