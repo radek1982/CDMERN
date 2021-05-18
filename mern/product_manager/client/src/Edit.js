@@ -7,10 +7,10 @@ const Edit = (props)  => {
     const afterUpdate = props.afterUpdate;
     const [ready, setReady] =useState(true);
     const [data, setData] = useState({});
-    const id = props.id;
+    const id = props.rid;
 
-    if (id!==null) {
-      console.log(id);
+    if (id!==undefined) {
+  
     }
     
     return(

@@ -15,7 +15,7 @@ function App() {
     <Container>    
     <Router>
       <List path="/"></List>
-      <List path=":id"></List>
+      <List path=":rid"></List>
     </Router>
     </Container>
     </Fragment>

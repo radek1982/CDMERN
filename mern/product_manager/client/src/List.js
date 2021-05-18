@@ -4,16 +4,16 @@ import Edit from "./Edit"
 import {Spinner,Button} from "react-bootstrap"
 
 const List = (props) => {
-    
+
+    // eslint-disable-next-line
     const [products,setProducts] = useState([]);
     const [loaded, setLoaded] = useState(false);
-    useEffect(() => 
-        axios.get("http://localhost:8000/api/products/").then(res => 
-    {
-        setProducts(res.data.products)
+    useEffect(() => {
+        
+        axios.get("http://localhost:8000/api/products/").then(res => { 
+        setProducts(res.data.products);
         setLoaded(true);
-    }));
-    
+    })});
     
     const productData = loaded && products.length>0 && products.map((e,i) => (<tr key={e._id}><td>{e.title}</td> 
     <td><Button variant="danger" onClick= {(x) =>  {
@@ -25,7 +25,7 @@ const List = (props) => {
     
     
     <Fragment>
-        <Edit id={props.id} afterUpdate={(d) => {
+        <Edit rid={props.rid} afterUpdate={(d) => {
 
         console.log('After update', d)
     setLoaded(false)}}></Edit>
