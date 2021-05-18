@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Edit from './Edit';
+import List from './List';
 
 
 import {Router} from "@reach/router"
@@ -14,7 +14,8 @@ function App() {
             </Navbar>
     <Container>    
     <Router>
-      <Edit path="/"></Edit>
+      <List path="/"></List>
+      <List path=":id"></List>
     </Router>
     </Container>
     </Fragment>

@@ -1,22 +1,43 @@
-import React from 'react'
+import React, {useState} from 'react'
 import axios from "axios"
-import {Form, FormGroup, FormLabel, FormControl, Button} from "react-bootstrap"
+import {Form, FormGroup, FormLabel, FormControl, Button, Spinner} from "react-bootstrap"
 
-const Edit = ( )  => {
+const Edit = (props)  => {
+    
+    const afterUpdate = props.afterUpdate;
+    const [ready, setReady] =useState(true);
+    const [data, setData] = useState({});
+    const id = props.id;
+
+    if (id!==null) {
+      console.log(id);
+    }
+    
     return(
     
-
     <Form onSubmit={(e) => {
       e.preventDefault();
-  
-      const data = {
+      setReady(false);
+      const dt = {
         title: e.target.title.value,
         price: e.target.price.value,
         description: e.target.description.value,
       }
-      axios.post("http://localhost:8000/api/products/new", data)
-        .then((r) => console.log(r.data)) 
-        .catch((r) => console.log(r.data))
+
+  
+
+      axios.post("http://localhost:8000/api/products/new", dt)
+    
+        .then((x) => {
+          setData(x.data.product);
+          afterUpdate(x.data.product);
+          setReady(true)
+        })
+        .finally((x)=> {
+          setData(data);
+          setReady(true)
+      
+        })
     }}> 
   
     
@@ -36,9 +57,10 @@ const Edit = ( )  => {
       </FormGroup>
   
       <FormGroup> 
-        <Button variant="primary" type="submit"> Add Product</Button>
+        <Button variant="primary" type="submit" disabled={!ready}> Add Product</Button>
       </FormGroup>
   
+    {!ready?<Spinner animation="border"></Spinner>:""}
       
   
   
