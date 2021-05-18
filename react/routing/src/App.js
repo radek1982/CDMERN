@@ -4,7 +4,7 @@ import {Router} from '@reach/router'
 
 const Output = (props) => {
 
-  let message = props.message || "welcome";
+  let message = props.message || "welcome"; 
   let bg = props.background || "#FFF";
   let color = props.color || "#000";
 
@@ -21,7 +21,7 @@ const Output = (props) => {
 
 function App() {
   return (<Router> 
-    <Output path="/"></Output>
+    <Output path="/home"></Output>
     <Output path=":message"></Output>
     <Output path=":message/:background/:color"></Output>
     
