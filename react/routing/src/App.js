@@ -23,7 +23,7 @@ function App() {
   return (<Router> 
     <Output path="/home"></Output>
     <Output path=":message"></Output>
-    <Output path=":message/:background/:color"></Output>
+    <Output path=":message/:color/:background"></Output>
     
  
   
