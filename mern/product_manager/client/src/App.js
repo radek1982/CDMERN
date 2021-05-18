@@ -17,6 +17,7 @@ function App() {
     <Router>
       <List path="/"></List>
       <List path=":rid"></List>
+      <List path="/edit/:rid" mode="edit"></List>
       <Detail path="/detail/:rid"></Detail>
     </Router>
     </Container>

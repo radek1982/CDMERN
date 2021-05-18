@@ -4,14 +4,18 @@ import axios from "axios";
 import Edit from "./Edit";
 import {Link} from "@reach/router";
 import {Spinner} from "react-bootstrap";
-
+import APIEndpoints from "./Config"
 const List =(props) => {
 
+    const refresh = () => {
+
+      setDone(false);
+    }
     const [products, setProducts] = useState([]);
     const [done, setDone] = useState(false)
    
     useEffect(() => {
-       !done && axios.get("http://localhost:8000/api/products").then((r) => setProducts(r.data.products)).then(() => setDone(true));
+       !done && axios.get(APIEndpoints.read()).then((r) => setProducts(r.data.products)).then(() => setDone(true));
     }, [done]);
 
 
@@ -22,7 +26,7 @@ const List =(props) => {
 
     return (
         <>
-        <Edit></Edit>
+        <Edit onUpdate={refresh} mode={props.mode } rid={props.rid}></Edit>
             <h2> All Products</h2>
         
         <ul>    
