@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
 
 const Pokemon = (props) => {
@@ -8,9 +9,8 @@ const Pokemon = (props) => {
     const [showList, setShowList] = useState(false);
         
     useEffect(() => {
-        fetch(API)
-            .then(response => response.json())
-            .then(response => setPokemon(response.results))
+        axios.get(API)
+            .then(response => setPokemon(response.data.results))
     }, []);
 
 
