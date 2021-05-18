@@ -1,0 +1,28 @@
+.tabs {
+
+}
+
+.tabs button {
+    display:inline-block;
+    height:40px;
+}
+
+.tabs .content {
+    background:#ccc;
+    border: 2px solid black;
+    padding:20px;
+}
+.tabs .navigation  {
+    list-style-type: none;
+}
+.tabs .navigation li {
+    display: inline-block;
+}
+.tabs .navigation li button.active {
+    background: red;;
+}
+
+.tabs .navigation li button {
+    width:100px;
+}
+
