@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react"
 import APIEndpoints from "./Config"
-import {Link} from "@reach/router"
+import Delete from "./Delete";
+import {navigate} from "@reach/router"
 
-import {Form,FormGroup,FormControl,FormLabel, Button, Spinner} from "react-bootstrap"
+import {Form,FormGroup,FormControl,FormLabel, Button, Spinner, ButtonGroup} from "react-bootstrap"
 
 const defaultValues =  Promise.resolve({data:{product: {title: "", price:0, description: ""}}});
 
@@ -81,10 +82,11 @@ return (
     <FormLabel>Description</FormLabel>
     <FormControl as="textarea" name="description" value={(data.description)} onChange={change}></FormControl>
 </FormGroup>
-<Link to="/" className="btn btn-primary"> Go Back</Link>
-<Button variant="primary" type="submit">
-{caption}
-</Button>
+<ButtonGroup aria-label="Basic example">
+
+    <Button variant="success"  type="submit">{caption}</Button>
+
+  </ButtonGroup>
 
 {!done ? <Spinner animation="border"></Spinner> : null}
 </Form>
